@@ -4,9 +4,14 @@ import { useRouter } from "next/router";
 import ErrorMessage from "components/ErrorMessage";
 import PostUpvoter from "components/PostUpvoter";
 
-export const ALL_POSTS_QUERY = gql`
-  query allPosts($first: Int!, $skip: Int!) {
-    allPosts(orderBy: createdAt_DESC, first: $first, skip: $skip) {
+export const FILTERED_POSTS_QUERY = gql`
+  query filteredPosts($first: Int!, $skip: Int!, $title: String) {
+    allPosts(
+      orderBy: createdAt_DESC
+      first: $first
+      skip: $skip
+      filter: { title_contains: $title }
+    ) {
       id
       title
       votes
@@ -19,17 +24,20 @@ export const ALL_POSTS_QUERY = gql`
   }
 `;
 
-export const allPostsQueryVars = {
+export const filteredPostsQueryVars = {
   skip: 0,
   first: 10,
 };
 
-export default function PostList() {
+export default function PostDetail() {
   const router = useRouter();
+  const {
+    query: { slug },
+  } = router;
   const { loading, error, data, fetchMore, networkStatus } = useQuery(
-    ALL_POSTS_QUERY,
+    FILTERED_POSTS_QUERY,
     {
-      variables: allPostsQueryVars,
+      variables: { ...filteredPostsQueryVars, title: slug },
       // Setting this value to true will make the component rerender when
       // the "networkStatus" changes, so we are able to know if it is fetching
       // more data

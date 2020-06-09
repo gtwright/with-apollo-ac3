@@ -1,5 +1,5 @@
-import { useMutation } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useMutation, gql } from "@apollo/client";
+// import gql from 'graphql-tag'
 
 const UPDATE_POST_MUTATION = gql`
   mutation updatePost($id: ID!, $votes: Int) {
@@ -9,10 +9,10 @@ const UPDATE_POST_MUTATION = gql`
       votes
     }
   }
-`
+`;
 
 export default function PostUpvoter({ votes, id }) {
-  const [updatePost] = useMutation(UPDATE_POST_MUTATION)
+  const [updatePost] = useMutation(UPDATE_POST_MUTATION);
 
   const upvotePost = () => {
     updatePost({
@@ -21,15 +21,15 @@ export default function PostUpvoter({ votes, id }) {
         votes: votes + 1,
       },
       optimisticResponse: {
-        __typename: 'Mutation',
+        __typename: "Mutation",
         updatePost: {
-          __typename: 'Post',
+          __typename: "Post",
           id,
           votes: votes + 1,
         },
       },
-    })
-  }
+    });
+  };
 
   return (
     <button onClick={() => upvotePost()}>
@@ -48,12 +48,12 @@ export default function PostUpvoter({ votes, id }) {
           border-color: transparent transparent #000000 transparent;
           border-style: solid;
           border-width: 0 4px 6px 4px;
-          content: '';
+          content: "";
           height: 0;
           margin-right: 5px;
           width: 0;
         }
       `}</style>
     </button>
-  )
+  );
 }

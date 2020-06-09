@@ -1,22 +1,24 @@
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-
+import { useRouter } from "next/router";
+import Link from "next/link";
 export default function Header() {
-  const { pathname } = useRouter()
-
+  const { pathname } = useRouter();
   return (
     <header>
       <Link href="/">
-        <a className={pathname === '/' ? 'is-active' : ''}>Home</a>
+        <a className={pathname === "/" ? "is-active" : ""}>Home</a>
       </Link>
       <Link href="/about">
-        <a className={pathname === '/about' ? 'is-active' : ''}>About</a>
+        <a className={pathname === "/about" ? "is-active" : ""}>About</a>
       </Link>
       <Link href="/client-only">
-        <a className={pathname === '/client-only' ? 'is-active' : ''}>
+        <a className={pathname === "/client-only" ? "is-active" : ""}>
           Client-Only
         </a>
       </Link>
+      <Link href="/p">
+        <a className={pathname === "/p" ? "is-active" : ""}>Search</a>
+      </Link>
+
       <style jsx>{`
         header {
           margin-bottom: 25px;
@@ -31,5 +33,5 @@ export default function Header() {
         }
       `}</style>
     </header>
-  )
+  );
 }
