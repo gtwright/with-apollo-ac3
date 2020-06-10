@@ -9,8 +9,7 @@
   "dependencies": {
     "@apollo/client": "^3.0.0-rc.2",
     "apollo-cache-inmemory": "1.6.5",
-    "graphql": "^14.0.2",
-    "graphql-tag": "2.10.3",
+    "graphql": "^15.1.0",
     "next": "latest",
     "next-pwa": "^2.5.0",
     "prop-types": "^15.6.2",
